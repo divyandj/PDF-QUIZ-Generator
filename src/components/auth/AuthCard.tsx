@@ -11,32 +11,24 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
   const [activeRole, setActiveRole] = useState<'teacher' | 'student'>('teacher');
 
   return (
-    <div className="glass-card w-full max-w-md p-8 relative overflow-hidden mx-4">
-      {/* Animated border glow effect */}
-      <div className="absolute inset-0 rounded-2xl border border-white/30 before:absolute before:inset-0 before:rounded-2xl before:p-[1px] before:bg-gradient-to-r before:from-light-teal before:to-neon-pink before:animate-pulse-glow"></div>
-
+    <div className="bg-white/5 backdrop-blur-md w-full max-w-md p-6 relative overflow-hidden mx-4 rounded-lg border border-white/10">
       {/* Card content */}
       <div className="relative z-10">
         {/* Role tabs */}
-        <div className="flex mb-8 border-b border-white/20">
+        <div className="flex mb-6 border-b border-white/10">
           <button
-            className={`role-tab flex-1 ${activeRole === 'teacher' ? 'active' : ''}`}
+            className={`role-tab flex-1 py-2 text-sm font-medium ${activeRole === 'teacher' ? 'text-light-teal border-b-2 border-light-teal' : 'text-white/50'}`}
             onClick={() => setActiveRole('teacher')}
           >
             Teacher
           </button>
           <button
-            className={`role-tab flex-1 ${activeRole === 'student' ? 'active' : ''}`}
+            className={`role-tab flex-1 py-2 text-sm font-medium ${activeRole === 'student' ? 'text-light-teal border-b-2 border-light-teal' : 'text-white/50'}`}
             onClick={() => setActiveRole('student')}
           >
             Student
           </button>
         </div>
-
-        {/* Card title */}
-        <h2 className="text-2xl font-medium text-white mb-6">
-          {isLogin ? 'Welcome Back' : 'Create Your Account'}
-        </h2>
 
         {/* Form */}
         <form className="space-y-4">
@@ -45,10 +37,9 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
               <input
                 type="text"
                 id="name"
-                className="input-glow w-full"
-                placeholder=" "
+                className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
+                placeholder="Full Name"
               />
-              <label htmlFor="name">Full Name</label>
             </div>
           )}
 
@@ -56,20 +47,18 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
             <input
               type="email"
               id="email"
-              className="input-glow w-full"
-              placeholder=" "
+              className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
+              placeholder="Email Address"
             />
-            <label htmlFor="email">Email Address</label>
           </div>
 
           <div className="float-label-input">
             <input
               type="password"
               id="password"
-              className="input-glow w-full"
-              placeholder=" "
+              className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
+              placeholder="Password"
             />
-            <label htmlFor="password">Password</label>
           </div>
 
           {!isLogin && (
@@ -77,10 +66,9 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
               <input
                 type="password"
                 id="confirmPassword"
-                className="input-glow w-full"
-                placeholder=" "
+                className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
+                placeholder="Confirm Password"
               />
-              <label htmlFor="confirmPassword">Confirm Password</label>
             </div>
           )}
 
@@ -88,7 +76,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
             <div className="flex justify-end">
               <Link 
                 to="/forgot-password" 
-                className="text-light-teal text-sm hover:text-white transition-colors"
+                className="text-white/50 text-sm hover:text-light-teal transition-colors"
               >
                 Forgot Password?
               </Link>
@@ -97,28 +85,27 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
 
           <button
             type="submit"
-            className={`w-full rounded-xl p-3 mt-2 font-medium overflow-hidden relative group ${
+            className={`w-full rounded-md p-2.5 mt-2 text-sm font-medium ${
               isLogin 
-                ? 'border-2 border-neon-pink text-white hover:bg-neon-pink/10' 
-                : 'bg-gradient-primary text-white'
-            }`}
+                ? 'bg-light-teal/10 text-light-teal hover:bg-light-teal/20' 
+                : 'bg-light-teal text-white hover:bg-light-teal/90'
+            } transition-colors flex items-center justify-center`}
           >
-            <span className="relative z-10 flex items-center justify-center group-hover:text-white transition-colors">
-              {isLogin ? 'Log In' : 'Sign Up'}
-              <ChevronRight size={18} className="ml-1 group-hover:translate-x-1 transition-transform" />
+            <span className="flex items-center justify-center">
+              {isLogin ? 'Sign In' : 'Create Account'}
+              <ChevronRight size={16} className="ml-1" />
             </span>
-            <span className="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 bg-gradient-to-r from-neon-pink to-light-teal z-0"></span>
           </button>
         </form>
 
         {/* Footer text */}
-        <p className="text-white/70 text-sm mt-6 text-center">
+        <p className="text-white/50 text-sm mt-6 text-center">
           {isLogin ? (
             <>
               Don't have an account?{' '}
               <Link
                 to="/signup"
-                className="text-light-teal hover:text-white transition-colors relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-light-teal after:origin-bottom-right after:transition-transform hover:after:scale-x-100 hover:after:origin-bottom-left"
+                className="text-light-teal hover:text-white transition-colors"
               >
                 Sign up
               </Link>
@@ -128,9 +115,9 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-light-teal hover:text-white transition-colors relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-light-teal after:origin-bottom-right after:transition-transform hover:after:scale-x-100 hover:after:origin-bottom-left"
+                className="text-light-teal hover:text-white transition-colors"
               >
-                Log in
+                Sign in
               </Link>
             </>
           )}

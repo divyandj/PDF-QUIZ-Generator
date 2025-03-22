@@ -6,6 +6,7 @@ interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
+  details?: string[];
   delay?: number;
 }
 
@@ -13,6 +14,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   icon: Icon, 
   title, 
   description, 
+  details = [],
   delay = 0 
 }) => {
   const delayClass = `animate-delay-${delay}`;
@@ -25,7 +27,18 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         <Icon size={20} className="text-white" />
       </div>
       <h3 className="text-xl font-medium text-white mb-2">{title}</h3>
-      <p className="text-white/70">{description}</p>
+      <p className="text-white/70 mb-4">{description}</p>
+      
+      {details.length > 0 && (
+        <ul className="text-white/70 text-sm space-y-2 border-t border-white/10 pt-3 mt-3">
+          {details.map((detail, index) => (
+            <li key={index} className="flex items-start">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-light-teal mt-1.5 mr-2"></span>
+              <span>{detail}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

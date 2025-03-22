@@ -26,7 +26,7 @@ const Index: React.FC = () => {
       <HeroSection />
       
       {/* Features Section */}
-      <section className="py-20 relative">
+      <section className="py-20 relative" id="features">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="inline-block bg-white/10 backdrop-blur-md text-light-teal px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -45,36 +45,72 @@ const Index: React.FC = () => {
               icon={FileUp}
               title="Upload PDF"
               description="Simply upload your PDF documents and let our AI analyze the content."
+              details={[
+                "Supports multiple file formats including PDF, DOCX, and TXT",
+                "Secure file storage with encryption",
+                "Instant text extraction with OCR capability",
+                "Unlimited storage for premium users"
+              ]}
               delay={100}
             />
             <FeatureCard 
               icon={FileText}
               title="Generate MCQs"
               description="Instantly transform the content into high-quality multiple-choice questions."
+              details={[
+                "AI-powered question generation based on content",
+                "Customizable difficulty levels",
+                "Question categorization by topics and subtopics",
+                "Manual editing options for fine-tuning"
+              ]}
               delay={200}
             />
             <FeatureCard 
               icon={Users}
               title="Student Management"
               description="Easily manage student accounts and track their performance."
+              details={[
+                "Create and manage student groups",
+                "Bulk import students via CSV",
+                "Detailed performance analytics",
+                "Progress tracking across multiple assessments"
+              ]}
               delay={300}
             />
             <FeatureCard 
               icon={Clock}
               title="Schedule Tests"
               description="Set up timed assessments and distribute them to your students."
+              details={[
+                "Flexible scheduling options",
+                "Automatic reminders for students",
+                "Time-restricted test access",
+                "Randomized question order options"
+              ]}
               delay={400}
             />
             <FeatureCard 
               icon={CheckCircle2}
               title="Automatic Grading"
               description="Tests are graded instantly, saving you hours of manual work."
+              details={[
+                "Real-time grading as students complete tests",
+                "Detailed score breakdowns by categories",
+                "Customizable grading scales",
+                "Export results in multiple formats"
+              ]}
               delay={500}
             />
             <FeatureCard 
               icon={Shield}
               title="Secure Platform"
               description="Your data is encrypted and protected with enterprise-grade security."
+              details={[
+                "End-to-end encryption for all data",
+                "GDPR and FERPA compliance",
+                "Regular security audits",
+                "Advanced anti-cheating measures for tests"
+              ]}
               delay={600}
             />
           </div>

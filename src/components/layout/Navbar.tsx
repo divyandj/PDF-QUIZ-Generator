@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,14 +53,6 @@ const Navbar: React.FC = () => {
             }`}
           >
             Features
-          </Link>
-          <Link
-            to="/pricing"
-            className={`text-white/80 hover:text-white transition-colors ${
-              isActive('/pricing') ? 'text-white' : ''
-            }`}
-          >
-            Pricing
           </Link>
           <Link
             to="/contact"
@@ -124,13 +116,6 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Features
-            </Link>
-            <Link
-              to="/pricing"
-              className="text-white/80 hover:text-white text-xl transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
             </Link>
             <Link
               to="/contact"

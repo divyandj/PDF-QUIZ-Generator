@@ -18,15 +18,15 @@ const Login: React.FC = () => {
       <Navbar />
       
       <section className="min-h-screen flex items-center justify-center py-20 px-4 relative">
-        {/* Animated background elements */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-light-teal/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-neon-pink/10 rounded-full blur-3xl animate-pulse"></div>
+        {/* Minimalist background elements */}
+        <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-light-teal/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-32 h-32 bg-neon-pink/5 rounded-full blur-3xl"></div>
         
         <div className="w-full max-w-md z-10">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-            <p className="text-white/70">
-              Log in to your account to continue your journey
+            <h1 className="text-2xl font-medium mb-2">Welcome Back</h1>
+            <p className="text-white/60 text-sm">
+              Log in to your account
             </p>
           </div>
           
