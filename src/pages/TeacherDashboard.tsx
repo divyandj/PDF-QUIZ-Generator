@@ -19,7 +19,8 @@ import {
   MoreVertical,
   Edit,
   Trash2,
-  Download
+  Download,
+  FileText
 } from 'lucide-react';
 
 const TeacherDashboard: React.FC = () => {
