@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -21,6 +20,7 @@ import {
   Clock,
   AlertCircle
 } from 'lucide-react';
+import PdfUpload from '../components/student/PdfUpload';
 
 const StudentDashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -435,6 +435,8 @@ const StudentDashboard: React.FC = () => {
               </div>
             </div>
           )}
+
+          {activeMenu === 'uploadPdf' && <PdfUpload />}
 
           {activeMenu === 'takeTest' && (
             <div className="animate-fade-in">
