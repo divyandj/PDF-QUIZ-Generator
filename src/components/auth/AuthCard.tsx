@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { toast } from "sonner";
 
 interface AuthCardProps {
   isLogin?: boolean;
@@ -9,6 +10,65 @@ interface AuthCardProps {
 
 const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
   const [activeRole, setActiveRole] = useState<'teacher' | 'student'>('teacher');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate network request
+    setTimeout(() => {
+      if (isLogin) {
+        // Simple validation for login
+        if (!email || !password) {
+          toast.error("Please fill all fields");
+          setIsLoading(false);
+          return;
+        }
+        
+        // Successful login simulation
+        toast.success(`Logged in successfully as ${activeRole}`);
+        
+        // Redirect based on role
+        if (activeRole === 'teacher') {
+          navigate('/teacher-dashboard');
+        } else {
+          navigate('/student-dashboard');
+        }
+      } else {
+        // Simple validation for signup
+        if (!name || !email || !password || !confirmPassword) {
+          toast.error("Please fill all fields");
+          setIsLoading(false);
+          return;
+        }
+        
+        if (password !== confirmPassword) {
+          toast.error("Passwords don't match");
+          setIsLoading(false);
+          return;
+        }
+        
+        // Successful signup simulation
+        toast.success(`Account created successfully as ${activeRole}`);
+        
+        // Redirect based on role
+        if (activeRole === 'teacher') {
+          navigate('/teacher-dashboard');
+        } else {
+          navigate('/student-dashboard');
+        }
+      }
+      
+      setIsLoading(false);
+    }, 1500);
+  };
 
   return (
     <div className="bg-white/5 backdrop-blur-md w-full max-w-md p-6 relative overflow-hidden mx-4 rounded-lg border border-white/10">
@@ -31,12 +91,14 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
         </div>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           {!isLogin && (
             <div className="float-label-input">
               <input
                 type="text"
                 id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
                 placeholder="Full Name"
               />
@@ -47,6 +109,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
               placeholder="Email Address"
             />
@@ -56,6 +120,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
               placeholder="Password"
             />
@@ -66,6 +132,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
               <input
                 type="password"
                 id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="bg-white/5 w-full px-4 py-2 rounded border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-light-teal/50 transition-colors"
                 placeholder="Confirm Password"
               />
@@ -85,15 +153,16 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin = false }) => {
 
           <button
             type="submit"
+            disabled={isLoading}
             className={`w-full rounded-md p-2.5 mt-2 text-sm font-medium ${
               isLogin 
                 ? 'bg-light-teal/10 text-light-teal hover:bg-light-teal/20' 
                 : 'bg-light-teal text-white hover:bg-light-teal/90'
-            } transition-colors flex items-center justify-center`}
+            } transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             <span className="flex items-center justify-center">
-              {isLogin ? 'Sign In' : 'Create Account'}
-              <ChevronRight size={16} className="ml-1" />
+              {isLoading ? 'Processing...' : isLogin ? 'Sign In' : 'Create Account'}
+              {!isLoading && <ChevronRight size={16} className="ml-1" />}
             </span>
           </button>
         </form>
